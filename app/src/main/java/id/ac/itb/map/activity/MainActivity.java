@@ -6,14 +6,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.widget.Toast;
 
-import java.util.HashMap;
-
 import id.ac.itb.map.R;
-import id.ac.itb.map.domain.Map;
-import id.ac.itb.map.rest.GetMapByName;
-import id.ac.itb.map.rest.GetMapByNameListener;
-import id.ac.itb.map.rest.GetMapList;
-import id.ac.itb.map.rest.GetMapListListener;
 
 public class MainActivity extends Activity {
 

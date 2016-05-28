@@ -2,13 +2,10 @@ package id.ac.itb.map.Service;
 
 import android.util.Log;
 
-import id.ac.itb.map.dao.MapDao;
-import id.ac.itb.map.dao.MapDaoImpl;
 import id.ac.itb.map.domain.Map;
 import id.ac.itb.map.domain.Position;
 import id.ac.itb.map.exception.BeaconOutOfRangeException;
 import id.ac.itb.map.exception.MapException;
-import id.ac.itb.map.exception.MapServerException;
 
 public class Ranging {
     public static int DISTANCE_TTL = 10000;
@@ -61,9 +58,9 @@ public class Ranging {
 
     }
 
-    public void setDistance(String uuid, int major_id, double distance) {
+    public void setDistance(int minorID, int major_id, double distance) {
 
-        if (!(map == null) && map.getUuid().equals(uuid)) {
+        if (!(map == null) && map.getMinorId() == minorID) {
             Log.w("BEACON DIST", major_id+"_"+distance);
             switch (major_id) {
                 case 1: {

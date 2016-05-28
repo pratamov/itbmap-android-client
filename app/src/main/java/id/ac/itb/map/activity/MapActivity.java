@@ -18,6 +18,8 @@ import id.ac.itb.map.utils.BitmapProviderPicasso;
 public class MapActivity extends TileViewActivity implements MovingListener {
 
     private ImageView user_marker;
+    private double x;
+    private double y;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -26,6 +28,7 @@ public class MapActivity extends TileViewActivity implements MovingListener {
         TileView tileView = getTileView();
 
         tileView.setBitmapProvider(new BitmapProviderPicasso());
+        //tileView.setShouldRecycleBitmaps(true);
 
         tileView.setSize(
                 Ranging.getInstance().getMap().getMapWidth() * 2,
@@ -93,7 +96,33 @@ public class MapActivity extends TileViewActivity implements MovingListener {
 
     }
 
-    private void setPin(final double x, final double y) {
+    private MarkerLayout.MarkerTapListener mMarkerTapListener = new MarkerLayout.MarkerTapListener() {
+        @Override
+        public void onMarkerTap(View v, int x, int y) {
+
+            Toast.makeText(getApplicationContext(), "Position : " + x + "," + y, Toast.LENGTH_LONG).show();
+
+            geofence();
+
+        }
+    };
+
+    private void geofence(){
+
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                //TODO set toast when passing geofence
+            }
+        });
+
+    }
+
+    @Override
+    public void onMoving(final double x, final double y) {
+
+        this.x = x;
+        this.y = y;
 
         runOnUiThread(new Runnable() {
             @Override
@@ -103,22 +132,5 @@ public class MapActivity extends TileViewActivity implements MovingListener {
             }
         });
 
-    }
-
-    private MarkerLayout.MarkerTapListener mMarkerTapListener = new MarkerLayout.MarkerTapListener() {
-        @Override
-        public void onMarkerTap(View v, int x, int y) {
-
-            Toast.makeText(getApplicationContext(), "Position : " + x + "," + y, Toast.LENGTH_LONG).show();
-
-        }
-    };
-
-    @Override
-    public void onMoving(double x, double y) {
-
-        Log.w("BEACON PIN X", x + "");
-        Log.w("BEACON PIN Y", y + "");
-        setPin(x, y);
     }
 }

@@ -1,11 +1,13 @@
 package id.ac.itb.map.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by Profisien on 5/25/2016.
  */
 public class Map {
+    private int minorId;
     private String uuid;
     private double positionXBeacon1;
     private double positionXBeacon2;
@@ -16,22 +18,30 @@ public class Map {
     private String mapRawImageFilename;
     private String mapTileImageUrl;
     private String mapName;
-    private String regionName;
     private String mapDescription;
     private double mapRealWidth;
     private double mapRealHeight;
     private int mapWidth;
     private int mapHeight;
+    private List<Geofence> geofences;
 
     public Map(){
     }
 
-    public void setUuid(String uuid){
-        this.uuid = uuid;
+    public int getMinorId() {
+        return minorId;
+    }
+
+    public void setMinorId(int minorId) {
+        this.minorId = minorId;
     }
 
     public String getUuid() {
         return uuid;
+    }
+
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
     }
 
     public double getPositionXBeacon1() {
@@ -90,20 +100,20 @@ public class Map {
         this.mapRawImageFilename = mapRawImageFilename;
     }
 
+    public String getMapTileImageUrl() {
+        return mapTileImageUrl;
+    }
+
+    public void setMapTileImageUrl(String mapTileImageUrl) {
+        this.mapTileImageUrl = mapTileImageUrl;
+    }
+
     public String getMapName() {
         return mapName;
     }
 
     public void setMapName(String mapName) {
         this.mapName = mapName;
-    }
-
-    public String getRegionName() {
-        return regionName;
-    }
-
-    public void setRegionName(String regionName) {
-        this.regionName = regionName;
     }
 
     public String getMapDescription() {
@@ -130,14 +140,6 @@ public class Map {
         this.mapRealHeight = mapRealHeight;
     }
 
-    public String getMapTileImageUrl() {
-        return mapTileImageUrl;
-    }
-
-    public void setMapTileImageUrl(String mapTileImageUrl) {
-        this.mapTileImageUrl = mapTileImageUrl;
-    }
-
     public int getMapWidth() {
         return mapWidth;
     }
@@ -154,25 +156,17 @@ public class Map {
         this.mapHeight = mapHeight;
     }
 
-    @Override
-    public String toString() {
-        return "Map{" +
-                "uuid='" + uuid + '\'' +
-                ", positionXBeacon1=" + positionXBeacon1 +
-                ", positionXBeacon2=" + positionXBeacon2 +
-                ", positionXBeacon3=" + positionXBeacon3 +
-                ", positionYBeacon1=" + positionYBeacon1 +
-                ", positionYBeacon2=" + positionYBeacon2 +
-                ", positionYBeacon3=" + positionYBeacon3 +
-                ", mapRawImageFilename='" + mapRawImageFilename + '\'' +
-                ", mapTileImageUrl='" + mapTileImageUrl + '\'' +
-                ", mapName='" + mapName + '\'' +
-                ", regionName='" + regionName + '\'' +
-                ", mapDescription='" + mapDescription + '\'' +
-                ", mapRealWidth=" + mapRealWidth +
-                ", mapRealHeight=" + mapRealHeight +
-                ", mapWidth=" + mapWidth +
-                ", mapHeight=" + mapHeight +
-                '}';
+    public List<Geofence> getGeofences() {
+        return geofences;
+    }
+
+    public void setGeofences(List<Geofence> geofences) {
+        this.geofences = geofences;
+    }
+
+    public void addGeofence(Geofence geofence){
+        if (this.geofences == null)
+            this.geofences = new ArrayList<>();
+        this.geofences.add(geofence);
     }
 }
