@@ -1,6 +1,10 @@
 package id.ac.itb.map.activity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.text.Html;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -18,6 +22,7 @@ import id.ac.itb.map.utils.BitmapProviderPicasso;
 public class MapActivity extends TileViewActivity implements MovingListener {
 
     private ImageView user_marker;
+    private FloatingActionButton infoButton;
     private double x;
     private double y;
 
@@ -25,10 +30,11 @@ public class MapActivity extends TileViewActivity implements MovingListener {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        infoButton = (FloatingActionButton) findViewById(R.id.infoButton);
+
         TileView tileView = getTileView();
 
         tileView.setBitmapProvider(new BitmapProviderPicasso());
-        //tileView.setShouldRecycleBitmaps(true);
 
         tileView.setSize(
                 Ranging.getInstance().getMap().getMapWidth() * 2,
@@ -86,6 +92,11 @@ public class MapActivity extends TileViewActivity implements MovingListener {
         frameTo(0.5, 0.5);
 
         MovingModel.getInstance().setMovingListener(this);
+
+        tileView.setOnLongClickListener(longClickListener);
+
+        infoButton.setOnClickListener(infoButtonListener);
+
     }
 
     private void addUserMarker(double x, double y) {
@@ -95,6 +106,39 @@ public class MapActivity extends TileViewActivity implements MovingListener {
         getTileView().addMarker(user_marker, x, y, null, null);
 
     }
+
+    private View.OnClickListener infoButtonListener = new View.OnClickListener() {
+
+        @Override
+        public void onClick(View v) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    AlertDialog alertDialog = new AlertDialog.Builder(MapActivity.this).create();
+                    alertDialog.setTitle("Positioning Information");
+                    alertDialog.setMessage(Html.fromHtml(Ranging.getInstance().getInformationHtml()));
+                    alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            });
+                    alertDialog.show();
+                }
+            });
+        }
+    };
+
+    private View.OnLongClickListener longClickListener = new View.OnLongClickListener(){
+
+        @Override
+        public boolean onLongClick(View v) {
+
+            Toast.makeText(getApplicationContext(), "Position : " + v.getScrollX() + "," + v.getScrollY(), Toast.LENGTH_LONG).show();
+            return true;
+
+        }
+    };
 
     private MarkerLayout.MarkerTapListener mMarkerTapListener = new MarkerLayout.MarkerTapListener() {
         @Override
@@ -133,4 +177,5 @@ public class MapActivity extends TileViewActivity implements MovingListener {
         });
 
     }
+
 }

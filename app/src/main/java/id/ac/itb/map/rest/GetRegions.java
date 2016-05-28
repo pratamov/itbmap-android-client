@@ -27,7 +27,7 @@ public class GetRegions extends AsyncTask<Void, Integer, HashMap<String, String>
     @Override
     protected HashMap<String, String> doInBackground(Void... params) {
 
-        String url = "http://216.126.192.36/itbmap/v1/regions";
+        String url = "http://216.126.192.36/itbmap-webservice/v1/regions";
         try {
             HashMap<String, String> regions = new HashMap<>();
 

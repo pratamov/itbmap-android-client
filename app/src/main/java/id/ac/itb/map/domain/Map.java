@@ -169,4 +169,27 @@ public class Map {
             this.geofences = new ArrayList<>();
         this.geofences.add(geofence);
     }
+
+    @Override
+    public String toString() {
+        return "Map{" +
+                "minorId=" + minorId +
+                ", uuid='" + uuid + '\'' +
+                ", positionXBeacon1=" + positionXBeacon1 +
+                ", positionXBeacon2=" + positionXBeacon2 +
+                ", positionXBeacon3=" + positionXBeacon3 +
+                ", positionYBeacon1=" + positionYBeacon1 +
+                ", positionYBeacon2=" + positionYBeacon2 +
+                ", positionYBeacon3=" + positionYBeacon3 +
+                ", mapRawImageFilename='" + mapRawImageFilename + '\'' +
+                ", mapTileImageUrl='" + mapTileImageUrl + '\'' +
+                ", mapName='" + mapName + '\'' +
+                ", mapDescription='" + mapDescription + '\'' +
+                ", mapRealWidth=" + mapRealWidth +
+                ", mapRealHeight=" + mapRealHeight +
+                ", mapWidth=" + mapWidth +
+                ", mapHeight=" + mapHeight +
+                ", geofences=" + geofences +
+                '}';
+    }
 }

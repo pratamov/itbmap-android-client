@@ -27,7 +27,7 @@ public class GetMaps extends AsyncTask<Void, Integer, HashMap<Integer, String>> 
     @Override
     protected HashMap<Integer, String> doInBackground(Void... params) {
 
-        String url = "http://216.126.192.36/itbmap/v1/maps";
+        String url = "http://216.126.192.36/itbmap-webservice/v1/maps";
 
         try {
 

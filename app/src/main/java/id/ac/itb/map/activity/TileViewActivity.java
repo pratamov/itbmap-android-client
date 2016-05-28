@@ -2,6 +2,7 @@ package id.ac.itb.map.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.widget.RelativeLayout;
 
 import com.qozix.tileview.TileView;
 import id.ac.itb.map.R;
@@ -12,12 +13,17 @@ public class TileViewActivity extends Activity {
 
     @Override
     public void onCreate( Bundle savedInstanceState ) {
-        super.onCreate( savedInstanceState );
-        tileView = new TileView( this );
-        tileView.setId( R.id.tileview_id );
-        tileView.setSaveEnabled( true );
+        super.onCreate(savedInstanceState);
 
-        setContentView( tileView );
+        setContentView(R.layout.activity_map);
+
+        tileView = new TileView(this);
+        tileView.setId(R.id.tileview_id);
+        tileView.setSaveEnabled(true);
+
+        ((RelativeLayout)findViewById(R.id.rootView)).addView(tileView);
+
+        //setContentView(tileView);
     }
 
     @Override

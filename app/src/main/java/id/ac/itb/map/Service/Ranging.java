@@ -122,5 +122,30 @@ public class Ranging {
         }
         Position position = new Position(x, y);
         return position;
+
+    }
+
+    public String getInformationHtml(){
+        String x = "?";
+        String y = "?";
+        try {
+            Position position = trilateration(true);
+            x = Math.round(position.getX()*100)/100+"";
+            y = Math.round(position.getY()*100)/100+"";
+        } catch (MapException e) {
+            e.printStackTrace();
+        } catch (BeaconOutOfRangeException e) {
+            e.printStackTrace();
+        }
+        String s = "<h6>UUID : </h6>" + map.getUuid() +
+                "<h6>Map Name : </h6>" + map.getMapName() +
+                "<h6>Description : </h6>" + map.getMapDescription() +
+                "<h6>User Position (Meter) [X,Y] : </h6>[" + x + "," + y + "]" +
+                "<h6>Area Size (Meter) [W,H] : </h6>[" + map.getMapRealWidth() + "," + map.getMapRealHeight() + "]" +
+                "<h6>Distance Beacon 1 (Meter) : </h6>" + distanceBeacon1 +
+                "<h6>Distance Beacon 2 (Meter) : </h6>" + distanceBeacon2 +
+                "<h6>Distance Beacon 3 (Meter) : </h6>" + distanceBeacon3 +
+                "<h6>Map Size (Pizel) [W,H] : </h6>[" + map.getMapWidth() + "," + map.getMapHeight() + "]";
+        return s;
     }
 }

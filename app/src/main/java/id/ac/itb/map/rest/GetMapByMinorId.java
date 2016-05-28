@@ -31,7 +31,7 @@ public class GetMapByMinorId extends AsyncTask<Integer, Integer, Map> {
     @Override
     protected Map doInBackground(Integer... params) {
         int minorId = params[0];
-        String url = "http://216.126.192.36/itbmap/v1/maps/"+minorId;
+        String url = "http://216.126.192.36/itbmap-webservice/v1/maps/"+minorId;
         try {
 
             String json = IOUtils.toString(new URL(url));
